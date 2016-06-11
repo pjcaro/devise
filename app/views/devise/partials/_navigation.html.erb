@@ -1,0 +1,97 @@
+<header>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+		<span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <li>
+      	<%= link_to "OverCAD", root_path, class:"navbar-brand" %>
+      </li>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+      <!--	<li class="dropdown col-md">
+           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Alumnos <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li>
+            	<%= link_to "Lista" %>
+            </li>
+            <li role="separator" class="divider"></li>
+            <li>
+            	<%= link_to "Asistencia" %>
+            </li>
+          </ul>
+        </li> -->
+
+        <li class="col-md">
+        <% if user_signed_in? %> 
+        <% if current_user.is_preceptor? %>
+        	<%= link_to "Cursos", cursos_path %>
+          
+        </li>
+
+        <li class="col-md">
+        	<%= link_to "Materias", root_path %>
+        </li>
+        <li class="col-md">
+        	<%= link_to "Profesores", root_path %>
+        </li>
+
+        <% end %>
+        <% end %>
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+					<li class="col-md">
+						<%= link_to "Cerrar sesion", destroy_user_session_path, method: :delete %>
+					</li>
+				<% else %>
+					<li class="col-md">
+						<%= link_to "Iniciar sesion", new_user_session_path %>
+					</li>
+					<li class="col-md">
+						<%= link_to "Crear cuenta", new_user_registration_path %>
+					</li>
+		<% end %>
+      </ul>
+      
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+</header>
+<% if user_signed_in? %> 
+<% if current_user.is_preceptor? %>
+<body>
+  <div class="col-xs-6 col-md-3 visible-md visible-lg">
+    <div class="thumbnail">
+    <h2 class="lobster">Preceptor</h2>
+      	<div class="field">
+			<%= image_tag current_user.preceptor.cover.url(), class:"imagen_user" %>
+		</div>
+		<p> <strong>Nombre:</strong> 
+			<%= current_user.preceptor.nombre %>
+		</p>
+
+		<p>
+		  <strong>Dni:</strong>
+		  <%= current_user.preceptor.dni %>
+		</p>
+
+		<p>
+		  <strong>Telefono:</strong>
+		  <%=current_user.preceptor.telefono %>
+		</p>
+    </div>
+  </div>
+</body>
+
+<% end %>
+<% end %>
