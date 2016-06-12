@@ -32,12 +32,14 @@
                     <%= link_to "Crear cuenta", new_user_registration_path %>
                   </li>
             <% end %>
-              </ul>
+            </ul>
               
           </div><!-- /.navbar-collapse -->
         </nav>
 
       </header>
+        <p class="alert" style="<%= "display:none;" if notice.nil? %>"><%= notice %></p>
+        <p class="alert" style="<%= "display:none;" if alert.nil? %>"><%= alert %></p>
       <%= yield %>
 
 </body>
